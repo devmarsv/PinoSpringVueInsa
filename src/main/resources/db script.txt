@@ -1,0 +1,116 @@
+CREATE USER PINOINSA IDENTIFIED BY PINOINSA;  -- USER 생성
+
+GRANT CONNECT, RESOURCE TO PINOINSA;     -- 권한 부여
+
+CONNECT PINNOINSA;
+
+CREATE TABLE PINOINSA_COM (
+       GUBUN    VARCHAR2(30) NOT NULL,
+       CODE     VARCHAR2(10) NOT NULL,
+       NAME     VARCHAR2(10),
+       NOTE     VARCHAR2(20),
+      CONSTRAINT PLAYER_PK PRIMARY KEY (GUBUN,CODE)
+);
+
+INSERT INTO PINOINSA_COM VALUES ('입사구분', '001', '신입', '신입');
+INSERT INTO PINOINSA_COM VALUES ('입사구분', '002', '경력', '경력');
+
+INSERT INTO PINOINSA_COM VALUES ('투입여부', '001', 'Y', 'Y');
+INSERT INTO PINOINSA_COM VALUES ('투입여부', '002', 'N', 'N');
+
+INSERT INTO PINOINSA_COM VALUES ('군필여부', '001', 'Y', 'Y');
+INSERT INTO PINOINSA_COM VALUES ('군필여부', '002', 'N', 'N');
+
+INSERT INTO PINOINSA_COM VALUES ('직위', '001', '사원', '사원');
+INSERT INTO PINOINSA_COM VALUES ('직위', '002', '주임', '주임');
+INSERT INTO PINOINSA_COM VALUES ('직위', '003', '대리', '대리');
+INSERT INTO PINOINSA_COM VALUES ('직위', '002', '과장', '과장');
+INSERT INTO PINOINSA_COM VALUES ('직위', '002', '차장', '차장');
+INSERT INTO PINOINSA_COM VALUES ('직위', '002', '부장', '부장');
+
+INSERT INTO PINOINSA_COM VALUES ('군별', '001', '없음', '없음');
+INSERT INTO PINOINSA_COM VALUES ('군별', '002', '육군', '육군');
+INSERT INTO PINOINSA_COM VALUES ('군별', '003', '해군', '해군');
+INSERT INTO PINOINSA_COM VALUES ('군별', '004', '공군', '공군');
+INSERT INTO PINOINSA_COM VALUES ('군별', '005', '특전사', '특전사');
+INSERT INTO PINOINSA_COM VALUES ('군별', '006', '해병대', '해병대');
+INSERT INTO PINOINSA_COM VALUES ('군별', '007', '카투사', '카투사');
+INSERT INTO PINOINSA_COM VALUES ('군별', '008', '기타', '기타');
+
+INSERT INTO PINOINSA_COM VALUES ('계급', '001', '이등병', '이등병');
+INSERT INTO PINOINSA_COM VALUES ('계급', '002', '일병', '일병');
+INSERT INTO PINOINSA_COM VALUES ('계급', '003', '상병', '상병');
+INSERT INTO PINOINSA_COM VALUES ('계급', '004', '병장', '병장');
+
+INSERT INTO PINOINSA_COM VALUES ('KOSA등록', '001', 'Y', 'Y');
+INSERT INTO PINOINSA_COM VALUES ('KOSA등록', '002', 'N', 'N');
+
+INSERT INTO PINOINSA_COM VALUES ('KOSA등급', '001', '초급', '초급');
+INSERT INTO PINOINSA_COM VALUES ('KOSA등급', '002', '중급', '중급');
+INSERT INTO PINOINSA_COM VALUES ('KOSA등급', '003', '고급', '고급');
+INSERT INTO PINOINSA_COM VALUES ('KOSA등급', '004', '특급', '특급');
+
+INSERT INTO PINOINSA_COM VALUES ('등급', '001', '초급', '초급');
+INSERT INTO PINOINSA_COM VALUES ('등급', '002', '중급', '중급');
+INSERT INTO PINOINSA_COM VALUES ('등급', '003', '고급', '고급');
+INSERT INTO PINOINSA_COM VALUES ('등급', '004', '특급', '특급');
+
+INSERT INTO PINOINSA_COM VALUES ('부서', '001', '인사부', '인사부');
+INSERT INTO PINOINSA_COM VALUES ('부서', '002', '총무부', '총무부');
+INSERT INTO PINOINSA_COM VALUES ('부서', '003', 'IT부', 'IT부');
+INSERT INTO PINOINSA_COM VALUES ('부서', '004', '영업부', '영업부');
+
+
+INSERT INTO PINOINSA_COM VALUES ('직종체크', '001', '영업', '영업');
+INSERT INTO PINOINSA_COM VALUES ('직종체크', '002', '인사', '인사');
+INSERT INTO PINOINSA_COM VALUES ('직종체크', '003', 'SI', 'SI');
+
+COMMIT;
+
+
+CREATE TABLE PINOINSA_MEMBER (
+       SABUN    NUMBER NOT NULL,
+       JOIN_DAY             VARCHAR2(20),
+       RETIRE_DAY        VARCHAR2(20),
+       PUT_YN              VARCHAR2(2),
+       NAME                VARCHAR2(20),
+       REG_NO              VARCHAR2(20),
+       ENG_NAME          VARCHAR2(20),
+       PHONE                VARCHAR2(20),
+       HP                     VARCHAR2(20),
+       CARRIER              VARCHAR2(100),
+       POS_GBN_CODE     VARCHAR2(10),
+       CMP_REG_NO        VARCHAR2(20),
+      CMP_REG_IMAGE     VARCHAR2(100),
+      SEX                     VARCHAR2(10),
+      YEARS                  NUMBER,
+      EMAIL                 VARCHAR2(30),
+      ZIP                     VARCHAR2(20),
+      ADDR1                VARCHAR2(100),
+      ADDR2                VARCHAR2(100),
+      DEPT_CODE          VARCHAR2(20),
+      JOIN_GBN_CODE    VARCHAR2(30),
+      ID                      VARCHAR2(20),
+      PWD                  VARCHAR2(30),
+      SALARY               NUMBER(20),
+      KOSA_REG_YN       VARCHAR2(4),
+      KOSA_CLASS_CODE VARCHAR2(10),
+      MIL_YN                VARCHAR2(4),
+      MIL_TYPE              VARCHAR(20),
+      MIL_LEVEL             VARCHAR(20),
+      MIL_STARTDATE     VARCHAR2(20),
+      MIL_ENDDATE       VARCHAR2(20),
+      JOB_TYPE             VARCHAR2(20),
+      GART_LEVEL         VARCHAR2(20),
+      SELF_INTRO         VARCHAR2(100),
+      CRM_NAME          VARCHAR2(20),
+     PROFILE               VARCHAR2(100),
+      CONSTRAINT PINOINSA_MEMBER_PK PRIMARY KEY (SABUN)
+);
+
+CREATE SEQUENCE PINOINSA_MEMBERSQ INCREMENT BY 1 START WITH 10000;
+
+
+
+select * from pinoinsa_com;
+

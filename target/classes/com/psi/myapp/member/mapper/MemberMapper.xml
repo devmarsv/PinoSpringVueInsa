@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psi.myapp.member.mapper.MemberMapper">
+  <select id="getList" parameterType="com.psi.myapp.member.dto.Member" resultType="com.psi.myapp.member.dto.Member">
+select * from (select sabun, to_date(join_day,'YYYY/MM/DD') join_day, to_date(retire_day, 'YYYY/MM/DD') retire_day, put_yn, name, reg_no, eng_name, phone, hp, carrier, pos_gbn_code, (select name from pinoinsa_com a where b.pos_gbn_code = a.code and a.gubun='직위') pos_gbn_code_name, cmp_reg_no,
+cmp_reg_image, sex, years, email, zip, addr1, addr2, dept_code, join_gbn_code, (select name from pinoinsa_com a where b.join_gbn_code = a.code and a.gubun='입사구분') join_gbn_code_name, id, pwd, salary, kosa_reg_yn, kosa_class_code, (select name from pinoinsa_com a where b.kosa_class_code = a.code and a.gubun='KOSA등급') kosa_class_code_name, mil_yn, mil_type, mil_level, mil_startdate, mil_enddate, job_type, (select name from pinoinsa_com a where b.join_gbn_code = a.code and a.gubun='직종체크') job_type_name, gart_level, self_intro, crm_name, profile from pinoinsa_member b 
+) where 1=1 
+<if test="SABUN!=null">and sabun like '%' || #{SABUN} || '%'</if>
+<if test="NAME!=null">and name like '%' || #{NAME} || '%' </if>
+<if test="JOIN_GBN_CODE_NAME!=null">and join_gbn_code_name like '%' || #{JOIN_GBN_CODE_NAME} || '%' </if>
+<if test="PUT_YN!=null">and put_yn like '%' || #{PUT_YN} || '%' </if>
+<if test="POS_GBN_CODE_NAME!=null">and pos_gbn_code_name like '%' || #{POS_GBN_CODE_NAME} || '%' </if>
+<if test="JOIN_DAY!=null">and join_day like '%' || #{JOIN_DAY} || '%' </if>
+<if test="RETIRE_DAY!=null">and retire_day like '%' || #{RETIRE_DAY} || '%' </if>
+<if test="JOB_TYPE!=null">and job_type like '%' || #{JOB_TYPE} || '%' </if>
+  </select>
+  <insert id="insertMember" parameterType="com.psi.myapp.member.dto.Member" useGeneratedKeys="true">
+	insert into PINOINSA_MEMBER(sabun, join_day, retire_day, put_yn, NAME, reg_no, eng_name, phone, hp<if test="CARRIER!=null">, CARRIER</if>, POS_GBN_CODE, CMP_REG_NO<if test="CMP_REG_IMAGE!=null">, CMP_REG_IMAGE</if>, SEX, YEARS, EMAIL, ZIP, ADDR1, ADDR2, DEPT_CODE, JOIN_GBN_CODE, ID, PWD, SALARY, KOSA_REG_YN, KOSA_CLASS_CODE, MIL_YN, MIL_TYPE, MIL_LEVEL, MIL_STARTDATE, MIL_ENDDATE, JOB_TYPE, GART_LEVEL, SELF_INTRO, CRM_NAME<if test="PROFILE!=null">, PROFILE</if>) values(PINOINSA_MEMBERSQ.nextval, #{JOIN_DAY}, #{RETIRE_DAY}, #{PUT_YN}, #{NAME}, #{REG_NO}, #{ENG_NAME}, #{PHONE}, #{HP}<if test="CARRIER!=null">, #{CARRIER}</if>, #{POS_GBN_CODE}, #{CMP_REG_NO}<if test="CMP_REG_IMAGE!=null">, #{CMP_REG_IMAGE}</if>, #{SEX}, #{YEARS}, #{EMAIL}, #{ZIP}, #{ADDR1}, #{ADDR2}, #{DEPT_CODE}, #{JOIN_GBN_CODE}, #{ID}, #{PWD}, #{SALARY}, #{KOSA_REG_YN}, #{KOSA_CLASS_CODE}, #{MIL_YN}, #{MIL_TYPE}, #{MIL_LEVEL}, #{MIL_STARTDATE}, #{MIL_ENDDATE}, #{JOB_TYPE}, #{GART_LEVEL}, #{SELF_INTRO}, #{CRM_NAME}<if test="PROFILE!=null">, #{PROFILE}</if>)
+	</insert>
+	<select id="selectMember" parameterType="int" resultType="com.psi.myapp.member.dto.Member">
+    select * from (select sabun, join_day, retire_day, put_yn, name, reg_no, eng_name, phone, hp, carrier, pos_gbn_code, (select name from pinoinsa_com a where b.pos_gbn_code = a.code and a.gubun='직위') pos_gbn_code_name, cmp_reg_no,
+cmp_reg_image, sex, years, email, zip, addr1, addr2, dept_code, join_gbn_code, (select name from pinoinsa_com a where b.join_gbn_code = a.code and a.gubun='입사구분') join_gbn_code_name, id, pwd, salary, kosa_reg_yn, kosa_class_code, (select name from pinoinsa_com a where b.kosa_class_code = a.code and a.gubun='KOSA등급') kosa_class_code_name, mil_yn, mil_type, mil_level, mil_startdate, mil_enddate, job_type, (select name from pinoinsa_com a where b.join_gbn_code = a.code and a.gubun='직종체크') job_type_name, gart_level, self_intro, crm_name, profile from pinoinsa_member b 
+) where sabun = #{SABUN}
+  </select>
+  <update id="updateMember" parameterType="com.psi.myapp.member.dto.Member">
+   update PINOINSA_MEMBER set join_day = #{JOIN_DAY}, retire_day = #{RETIRE_DAY}, put_yn = #{PUT_YN}, NAME = #{NAME}, reg_no = #{REG_NO}, eng_name = #{ENG_NAME}, phone = #{PHONE}, hp = #{HP}<if test="CARRIER!=null">, carrier = #{CARRIER}</if>, pos_gbn_code = #{POS_GBN_CODE}, cmp_reg_no = #{CMP_REG_NO}<if test="CMP_REG_IMAGE!=null">, cmp_reg_image = #{CMP_REG_IMAGE}</if>, sex = #{SEX}, years = #{YEARS}, email = #{EMAIL}, zip = #{ZIP}, addr1 = #{ADDR1}, addr2 = #{ADDR2}, dept_code = #{DEPT_CODE}, join_gbn_code = #{JOIN_GBN_CODE}, id = #{ID}, pwd = #{PWD}, salary = #{SALARY}, kosa_reg_yn = #{KOSA_REG_YN}, kosa_class_code = #{KOSA_CLASS_CODE}<if test="MIL_YN!=null">, mil_yn=#{MIL_YN}</if><if test="MIL_TYPE!=null">, mil_type = #{MIL_TYPE}</if><if test="MIL_LEVEL!=null">, mil_level = #{MIL_LEVEL}</if>, mil_startdate = #{MIL_STARTDATE}, mil_enddate = #{MIL_ENDDATE}, job_type = #{JOB_TYPE}, gart_level = #{GART_LEVEL}, self_intro = #{SELF_INTRO}, crm_name = #{CRM_NAME}<if test="PROFILE!=null">, PROFILE = #{PROFILE}</if> where sabun = #{SABUN}
+  </update>
+  
+  <select id="idChk" parameterType="com.psi.myapp.member.dto.Member" resultType="int">
+   select count(*) from PINOINSA_MEMBER where id = #{ID}
+  </select>
+</mapper>
